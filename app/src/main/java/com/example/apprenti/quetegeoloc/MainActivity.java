@@ -13,7 +13,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.webkit.GeolocationPermissions;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +25,8 @@ import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity{
     public static final int MY_REQUEST_FOR_LOCATION = 1;
@@ -36,7 +41,8 @@ public class MainActivity extends AppCompatActivity{
     TextView textViewCity;
     TextView textViewCloud;
     TextView textViewPressure;
-    TextView textViewForecast;
+    ListView listViewForecast;
+    private WeatherAdapter weatherAdapter;
 
     // Acquire a reference to the system Location Manager
 
@@ -48,7 +54,7 @@ public class MainActivity extends AppCompatActivity{
         textViewCity = (TextView) findViewById(R.id.textViewCity);
         textViewCloud= (TextView) findViewById(R.id.textViewCloud);
         textViewPressure= (TextView)findViewById(R.id.textViewPressure);
-        textViewForecast= (TextView) findViewById(R.id.textViewForecast);
+        listViewForecast= (ListView) findViewById(R.id.listViewForecast);
 
         apiKey = getString(R.string.ApiKey);
 
@@ -124,14 +130,20 @@ public class MainActivity extends AppCompatActivity{
 
         @Override
         public void onRequestSuccess(ForecastWeatherModel forecastWeatherModel) {
-            textViewForecast.setText(forecastWeatherModel.getList().toString());
+
+
+            final ArrayList<List> weatherList = (ArrayList<List>) forecastWeatherModel.getList();
+            final WeatherAdapter weatherAdapter = new WeatherAdapter(MainActivity.this, weatherList);
+            listViewForecast.setAdapter(weatherAdapter);
+
         }
     }
+
 
     private class CurrentWeatherRequestListener implements RequestListener<CurrentWeatherModel> {
         @Override
         public void onRequestFailure(SpiceException spiceException) {
-            String toto = "toto";
+
 
         }
 

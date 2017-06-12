@@ -21,8 +21,7 @@ public class ForecastWeatherRequest extends GoogleHttpClientSpiceRequest<Forecas
 
     public ForecastWeatherRequest( double latitude, double longitude, String apiKey) {
         super(ForecastWeatherModel.class );
-        this.baseUrl = "http://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&appid="+apiKey+"&lang=fr";
-
+        this.baseUrl = "http://api.openweathermap.org/data/2.5/forecast?lat="+latitude+"&lon="+longitude+"&appid="+apiKey+"&lang=fr";
     }
 
     @Override
@@ -36,6 +35,8 @@ public class ForecastWeatherRequest extends GoogleHttpClientSpiceRequest<Forecas
         return request;
 
     }
+
+
 }
 
 
