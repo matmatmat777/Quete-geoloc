@@ -2,11 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.apprenti.quetegeoloc">
 
+
+
     <uses-feature android:name="android.hardware.location.gps" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-feature android:name="android.hardware.location.gps" />
     <uses-feature android:name="android.hardware.location.network" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
 
     <application
         android:allowBackup="true"
@@ -21,13 +26,20 @@
 
 
         <activity android:name=".MainActivity">
+
+            <service android:name="com.octo.android.robospice.GsonGoogleHttpClientSpiceService"
+                android:exported="false"/>
+            <service
+                android:name="com.example.apprenti.quetegeoloc.JsonSpiceService"
+                android:exported="false" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
 
             </intent-filter>
         </activity>
-
+        <service android:name="com.octo.android.robospice.GsonGoogleHttpClientSpiceService"
+            android:exported="false" />
 
     </application>
 
