@@ -150,11 +150,11 @@ public class MainActivity extends AppCompatActivity{
         @Override
         public void onRequestSuccess(CurrentWeatherModel currentWeatherModel) {
             double windSpeed = currentWeatherModel.getWind().getSpeed()*3.6;
-            textViewWind.setText(String.valueOf(windSpeed));
+            textViewWind.setText(String.valueOf(windSpeed) + " " +"km/h");
             textViewCity.setText(currentWeatherModel.getName());
             double temperatureC = currentWeatherModel.getMain().getTemp()-273.15;
-            textViewCloud.setText(String.valueOf(temperatureC));
-            textViewPressure.setText(String.valueOf(currentWeatherModel.getMain().getPressure()));
+            textViewCloud.setText(String.valueOf(temperatureC)+ " " + " °C");
+            textViewPressure.setText(String.valueOf(currentWeatherModel.getMain().getPressure()) + " " + " hpa");
 
 
 
